@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Fruit value overrides - Global persistent cross-session sync
+    match /fruit_overrides/{overrideId} {
+      allow read, write: if true;
+    }
+
+    // Custom items - Global persistent cross-session sync
+    match /custom_items/{itemId} {
+      allow read, write: if true;
+    }
+
+    // Deleted item markers - Global persistent cross-session sync
+    match /deleted_items/{itemId} {
+      allow read, write: if true;
+    }
+
+    // Custom AI responses - Global persistent cross-session sync
+    match /custom_responses/{responseId} {
+      allow read, write: if true;
+    }
+
+    // Admin accounts - Global persistent cross-session sync
+    match /admin_accounts/{accountId} {
+      allow read, write: if true;
+    }
+
+    // Catch-all fallback
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
